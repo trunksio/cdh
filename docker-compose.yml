@@ -1,0 +1,37 @@
+version: '2'
+services:
+  cm:
+    image: trunks.io/cdh
+    hostname: cm
+    ports:
+      - 7180:7180
+      - 80:80
+    command: /cmstart.sh
+  agent1:
+    image: trunks.io/cdh
+    hostname: agent1
+    ports:
+      - 8088:8088
+      - 8888:8888
+      - 8032:8032
+      - 2181:2181
+    volumes:
+      - ./src/:/src
+    ulimits:
+        memlock: 2000000000
+    command: /agentstart.sh
+  agent2:
+    image: trunks.io/cdh
+    hostname: agent2
+    ports:
+      - 9092:9092
+    ulimits:
+        memlock: 2000000000
+    command: /agentstart.sh
+  agent3:
+    image: trunks.io/cdh
+    hostname: agent3
+    ulimits:
+        memlock: 2000000000
+    command: /agentstart.sh
+   
